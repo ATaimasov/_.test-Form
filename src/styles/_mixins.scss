@@ -1,0 +1,6 @@
+@mixin buttonPrimaryWhite {
+    color: $color-primary-whiteS-text;
+    background: $color-primary-whiteS;
+    border: 0px solid transparent;
+    border-radius: 4px;
+}
