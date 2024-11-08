@@ -9,7 +9,7 @@
 <style lang="scss" scoped>
 
     .btn-save {
-        @include buttonDefault;
+        @include buttonRoundPrimaryFlat; 
         background-color: $color-primary;
         color: $color-primary-white;
         width: 7.375rem; //118px;

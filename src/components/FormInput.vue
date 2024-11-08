@@ -4,26 +4,43 @@
         type="text" 
         class="form__input" 
         placeholder=""
-        v-model="localValue"
-        :class="{ 'form__input--error': error }"
+        :class="{ 'form__input--error': hasError }"
+        @input="updateValue"
+        :value="modelValue"
         >
         <span class="form__placeholder">{{ placeholder }}</span>
-        <span v-if="error" class="form__error">{{ error }}</span>
+        <span v-if="hasError" class="form__error">{{ errorName }}</span>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const { value, error, validateFunction, placeholder } = defineProps({
-    value: String,
-    error: String,
+import { ref, defineProps, defineEmits } from 'vue'
+const { errorName, validateFunction, placeholder, maxLength, modelValue, hasError } = defineProps({
+    modelValue: String,
+    errorName: String,
     validateFunction: Function,
-    placeholder: String
+    placeholder: String,
+    maxLength: {
+        type: Number,
+        default: Infinity
+    },
+    hasError: {
+        type: Boolean,
+        default: false
+    }
 })
 
+const emit = defineEmits(['update:modelValue', 'validate'])
 
-
-const localValue = ref(value)
+const updateValue = (event) => {
+  let value = event.target.value
+  if(maxLength && value.length > maxLength) {
+    value = value.slice(0, maxLength)
+    event.target.value = value 
+  }
+  emit('update:modelValue', value)
+  emit('validate', value)
+}
 
 
 </script>
@@ -40,7 +57,7 @@ const localValue = ref(value)
     height: 3.5rem;
     width: 100%;
     border: 1px solid $color-GrayL;
-    border-radius: $button-border-radius;
+    border-radius: 4px;
     padding-left: 0.625rem;
     padding-top: 0.938rem;
 
@@ -49,6 +66,11 @@ const localValue = ref(value)
     &:not(:placeholder-shown) + .form__placeholder {
       top: 25%;
       font-size: 0.813rem;
+
+      & + .form__error {
+        font-size: 0.9rem;
+        top: 50%;
+      }
     }
 
     &--error {
@@ -66,9 +88,9 @@ const localValue = ref(value)
   }
 
   &__error {
-    font-size: 1rem;
+    font-size: 0.813rem;
     position: absolute;
-    top: 50%;
+    top: 25%;
     right: 0.625rem;
     transform: translateY(-50%);
     color: $color-red;

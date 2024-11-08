@@ -3,41 +3,20 @@
     <div class="form__container">
       <h2 class="form__title">Персональные данные</h2>
       <FormInput
-      :value="localPerson.name"
-      :error="localPerson.errors.nameError"
-      @input="validateName"
+      v-model="localPerson.name"
+      :errorName="PLACEHOLDER.errors.nameError"
+      :hasError="localPerson.errors.nameError"
       :placeholder="PLACEHOLDER.name"
+      @validate="validateName"
       />
-      <!-- <div class="form__input-wrapper">
-        <input 
-          type="text" 
-          class="form__input" 
-          placeholder=""
-          v-model="localPerson.name"
-          @input="validateName"
-          :class="{ 'form__input--error': localPerson.errors.nameError }"
-        >
-        <span class="form__placeholder">{{ PLACEHOLDER.name }}</span>
-        <span v-if="localPerson.errors.nameError" class="form__error">{{ localPerson.errors.nameError }}</span>
-      </div> -->
       <FormInput
-      :value="localPerson.age"
-      :error="localPerson.errors.age"
-      @input="validateAge"
+      v-model="localPerson.age"
+      :errorName="PLACEHOLDER.errors.ageError"
+      :hasError="localPerson.errors.ageError"
       :placeholder="PLACEHOLDER.age"
+      @validate="validateAge"
+      :maxLength="3"
       />
-      <!-- <div class="form__input-wrapper">
-        <input 
-          type="text" 
-          class="form__input"
-          placeholder=""
-          v-model="localPerson.age"
-          @input="validateAge"
-          :class="{ 'form__input--error': localPerson.errors.ageError }"
-        >
-        <span class="form__placeholder">{{ PLACEHOLDER.age }}</span>
-        <span v-if="localPerson.errors.ageError" class="form__error">{{ localPerson.errors.ageError }}</span>
-      </div> -->
     </div>
     <div class="form__container">
       <div class="form__title">
@@ -46,6 +25,7 @@
           class="form__title-btn"
           @click="addChild" 
           :disabled="localChildren.length >= 5"
+          :class="{ 'form__title-btn--disabled': localChildren.length >= 5 }"
         />
       </div>
       <div 
@@ -53,29 +33,22 @@
         :key="child.id"
         class="form__children-list"
       >
-        <div class="form__input-wrapper">
-          <input 
-            type="text" 
-            placeholder="" 
-            class="form__input"
-            v-model="child.name"
-            @input="validateName"
-          >
-          <span class="form__placeholder">{{ PLACEHOLDER.name }}</span>
-        </div>
-        <div class="form__input-wrapper">
-          <input 
-            type="text" 
-            placeholder="" 
-            class="form__input"
-            @input="validateChildAge(index)"
-            v-model="child.age"
-            :class="{ 'form__input--error': child.ageError }"
-          >    
-          <span class="form__placeholder">{{ PLACEHOLDER.age }}</span>
-          <span v-if="child.errors.ageError" class="form__error">{{ child.errors.ageError }}</span>
-        </div>
-        <ButtonRemove class="children-btn__remove" @click="removeChild(index)" />
+        <FormInput
+        v-model="child.name"
+        :errorName="PLACEHOLDER.errors.nameError"
+        :hasError="child.errors.nameError"
+        @validate="(value) => validateChildName(index, value)"
+        :placeholder="PLACEHOLDER.name"
+        />
+        <FormInput
+        v-model="child.age"
+        :errorName="PLACEHOLDER.errors.ageError"
+        :hasError="child.errors.ageError"
+        @validate="(value) => validateChildAge(index, value)"
+        :placeholder="PLACEHOLDER.age"
+        :maxLength="3"
+        />
+        <ButtonRemove @click="removeChild(index)" />
       </div>
     </div>
     <ButtonSave 
@@ -88,6 +61,7 @@
 
 <script setup>
 import { computed, reactive, ref } from 'vue'
+// import { onDeactivated, onActivated } from 'vue'
 import ButtonRemove from '@/components/UI/ButtonRemove.vue'
 import ButtonSave from '@/components/UI/ButtonSave.vue'
 import ButtonAddChildren from '@/components/UI/ButtonAddChildren.vue'
@@ -99,6 +73,10 @@ import FormInput from '@/components/FormInput.vue'
 const PLACEHOLDER = {
   name: 'Имя',
   age: 'Возраст',
+  errors: {
+    nameError: 'Недопустимое имя',
+    ageError: 'Недопустимый возраст',
+  }
 }
 
 const personalDataStore = usePersonalDataStore()
@@ -106,11 +84,11 @@ const { savePersonalData } = storeToRefs(personalDataStore)
 
 const localPerson = ref({
   name: '',
-  age: '',
+  age: null,
   id: uid(),
   errors: {
-    ageError: '',
-    nameError: '',
+    ageError: false,
+    nameError: false,
   }
 })
 
@@ -119,53 +97,45 @@ const localChildren = ref([])
 const isFormValid = computed(() => {
   const age = parseInt(localPerson.value.age);
   const ageError = localPerson.value.errors.ageError;
+  const nameError = localPerson.value.errors.nameError;
 
   return localPerson.value.name 
     && age
     && !ageError
-    && localChildren.value.every(child => child.name && child.age && !child.ageError)
+    && !nameError
+    && localChildren.value.every(child => child.name && child.age && !child.ageError && !child.nameError)
 })
 
-const validateName = (person) => {
+const validateName = (value) => {
     const nameRegex = /^[а-яА-ЯёЁa-zA-Z]+$/;
-    if (!nameRegex.test(person.target.value)) {
-        localPerson.value.errors.nameError = 'Недопустимое имя'
+    if (!nameRegex.test(value)) {
+        localPerson.value.errors.nameError = true
     } else {
-        localPerson.value.errors.nameError = ''
+        localPerson.value.errors.nameError = false
     }
 }
 
-const validateAge = () => {
-  const age = parseInt(localPerson.value.age);
+const validateAge = (value) => {
+  const ageRegex = /^[0-9]+$/
 
-  if (isNaN(age) || age <= 0 || age > 150) {
-    localPerson.value.errors.ageError = 'Недопустимый возраст'
+  if(!ageRegex.test(value)) {
+    localPerson.value.errors.ageError = true
   } else {
-    localPerson.value.errors.ageError = ''
+    localPerson.value.errors.ageError = false
   }
-  localPerson.value.age = localPerson.value.age.slice(0, 3)
+  localPerson.value.age = value.slice(0, 3)
 }
 
-const validateChildAge = (index) => {
-  const age = parseInt(localChildren.value[index].age)
-
-  if (isNaN(age) || age < 0 || age > 150) {
-    localChildren.value[index].errors.ageError = 'Недопустимый возраст'
-  } else {
-    localChildren.value[index].errors.ageError = ''
-  }
-  localChildren.value[index].age = localChildren.value[index].age.slice(0, 3)
-}
 
 const addChild = () => {
   if (localChildren.value.length < 5) {
     localChildren.value.push({ 
         name: '', 
-        age: '', 
+        age: null, 
         id: uid(),
         errors: {
-            ageError: '', 
-            nameError: '',
+            ageError: false, 
+            nameError: false,
         } 
     })
   }
@@ -173,6 +143,27 @@ const addChild = () => {
 
 const removeChild = (index) => {
   localChildren.value.splice(index, 1)
+}
+
+const validateChildName = (index, value) => {
+  const nameRegex = /^[а-яА-ЯёЁa-zA-Z]+$/;
+  if (!nameRegex.test(value)) {
+    localChildren.value[index].errors.nameError = true
+  } else {
+    localChildren.value[index].errors.nameError = false
+  }
+}
+
+const validateChildAge = (index, value) => {
+  const ageRegex = /^[0-9]+$/
+
+  if(!ageRegex.test(value)) {
+    localChildren.value[index].errors.ageError = true
+  } else {
+    localChildren.value[index].errors.ageError = false
+  }
+
+  localChildren.value[index].age = value.slice(0, 3)
 }
 
 const saveInfo = () => {
@@ -190,6 +181,7 @@ const saveInfo = () => {
     personalDataStore.savePersonalData(person)
   }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -229,60 +221,27 @@ const saveInfo = () => {
     align-items: center;
   }
 
-//   &__input-wrapper {
-//     position: relative;
-//     width: 100%;
-//   }
-
-//   &__input {
-//     height: 3.5rem;
-//     width: 100%;
-//     border: 1px solid $color-GrayL;
-//     border-radius: $button-border-radius;
-//     padding-left: 0.625rem;
-//     padding-top: 0.938rem;
-
-//     &:focus + .form__placeholder,
-//     &:focus-visible + .form__placeholder,
-//     &:not(:placeholder-shown) + .form__placeholder {
-//       top: 25%;
-//       font-size: 0.813rem;
-//     }
-
-//     &--error {
-//       background: $color-error;
-//     }
-//   }
-
-//   &__placeholder {
-//     position: absolute;
-//     top: 50%;
-//     left: 0.625rem;
-//     transform: translateY(-50%);
-//     color: $color-GrayK;
-//     transition: $animation-default;
-//   }
-
-//   &__error {
-//     font-size: 1rem;
-//     position: absolute;
-//     top: 50%;
-//     right: 0.625rem;
-//     transform: translateY(-50%);
-//     color: $color-red;
-//     transition: $animation-default;
-//   }
-
   &__title-btn {
     @include buttonPrimaryWhite;
     background: $color-primary-white;
     padding: 0.625rem 1.25rem;
-  }
-}
 
-.children-btn__remove {
-  height: 1.5rem;
-  background: white;
+    &:hover:not(&--disabled) {
+      background: $color-primary-hover;
+      color: $color-primary-white;
+      border-color: transparent;
+    }
+
+    // &--disabled.btn {
+    //     background: $color-primary-disabled;
+    //     color: $color-primary-white;
+    //     border-color: transparent;
+    // }
+    // in the test task asked to disappear  button. this is opposed UI kit (button have disabled state) 
+    &--disabled.btn {
+        opacity: 0;
+    }
+  }
 }
 
 .btn-disabled {

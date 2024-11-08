@@ -4,15 +4,11 @@ import FormCard from '@/components/FormCard.vue'
 </script>
 
 <template>
-  <div class="form-container">
+  <section class="section">
     <FormCard/>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
-  .form-container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-  }
+ 
 </style>

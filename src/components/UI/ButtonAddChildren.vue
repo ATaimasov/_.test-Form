@@ -1,6 +1,7 @@
 <template>
     <button class="btn btn-add"> 
-        <AddIcon/>
+        <AddIcon class="btn__icon"
+        />
         <span>Добавить ребенка</span>
     </button>
 </template>
@@ -10,12 +11,14 @@ import AddIcon from '@/components/icons/AddIcon.vue'
 </script>
 
 <style lang="scss" scoped>
-    .btn.btn-add {
-        @include buttonDefault;
-        border: 2px solid $color-primary;
-        border-radius: 100px;
-        display: flex;
-        gap: 0.25rem; //4px;
-        align-items: center;
+    .btn {
+        &.btn-add {
+            @include buttonRoundFlat;
+            align-items: center;
+            display: flex;
+            gap: 0.25rem; //4px;
+        }
     }
+
+
 </style>

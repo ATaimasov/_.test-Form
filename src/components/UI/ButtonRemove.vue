@@ -10,6 +10,7 @@
 
     .btn-remove {
         @include buttonDefault;
+        @include buttonFlat;
     }
 
 </style>
