@@ -40,7 +40,7 @@ import CompanyIcon from '@/components/icons/CompanyIcon.vue'
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            gap: 24px;
+            gap: 1.5rem; //24px;
 
             &-item {
                 font-size: 1rem;

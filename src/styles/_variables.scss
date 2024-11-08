@@ -13,9 +13,15 @@ $color-primary-whiteS-text: #01A7FD;
 $color-GrayK: #6B6B6B;
 $color-GrayL: #F1F1F1;
 
+$color-error: #F9E3E3;
+$color-red: #DB524E;
+$color-success: #27AE60;
+
 
 $font-size-html: 100%;
 $font-size-h2: 1rem;
 $line-height-h3: 1.5rem;
 
 $button-border-radius: 4px;
+
+$animation-default: all .3s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
