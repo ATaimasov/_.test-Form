@@ -33,12 +33,8 @@
         &__text-container {
             margin: 5px;
             display: flex;
-            align-items: flex-end;
-            width: 116px;
-            height: 16px;
-            flex: none;
-            order: 0;
-            flex-grow: 0;
+            align-items: center;
+            justify-content: center;
         }
 
         &-text {
