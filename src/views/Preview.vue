@@ -48,8 +48,8 @@ const { person } = storeToRefs(personalDataStore)
 
     &__title {
       font-weight: 500;
-      line-height: $line-height-h3;
-      font-size: $font-size-h2;
+      line-height: v.$line-height-h3;
+      font-size: v.$font-size-h2;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -68,8 +68,8 @@ const { person } = storeToRefs(personalDataStore)
 
       &-text {
         font-weight: 700;
-        line-height: $line-height-h3;
-        font-size: $font-size-h2;
+        line-height: v.$line-height-h3;
+        font-size: v.$font-size-h2;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -82,8 +82,8 @@ const { person } = storeToRefs(personalDataStore)
       &-child {
         display: inline;
         height: 2.75rem;
-        border: 1px solid $color-GrayL;
-        background: $color-GrayL;
+        border: 1px solid v.$color-GrayL;
+        background: v.$color-GrayL;
         border-radius: 4px;
         padding: 0.625rem 1.25rem;
       }

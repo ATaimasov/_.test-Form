@@ -56,7 +56,7 @@ const updateValue = (event) => {
   &__input {
     height: 3.5rem;
     width: 100%;
-    border: 1px solid $color-GrayL;
+    border: 1px solid v.$color-GrayL;
     border-radius: 4px;
     padding-left: 0.625rem;
     padding-top: 0.938rem;
@@ -74,7 +74,7 @@ const updateValue = (event) => {
     }
 
     &--error {
-      background: $color-error;
+      background: v.$color-error;
     }
   }
 
@@ -83,8 +83,8 @@ const updateValue = (event) => {
     top: 50%;
     left: 0.625rem;
     transform: translateY(-50%);
-    color: $color-GrayK;
-    transition: $animation-default;
+    color: v.$color-GrayK;
+    transition: v.$animation-default;
   }
 
   &__error {
@@ -93,8 +93,8 @@ const updateValue = (event) => {
     top: 25%;
     right: 0.625rem;
     transform: translateY(-50%);
-    color: $color-red;
-    transition: $animation-default;
+    color: v.$color-red;
+    transition: v.$animation-default;
   }
 }
 

@@ -9,8 +9,8 @@
 <style lang="scss" scoped>
 
     .btn-remove {
-        @include buttonDefault;
-        @include buttonFlat;
+        @include btn.buttonDefault;
+        @include btn.buttonFlat;
     }
 
 </style>

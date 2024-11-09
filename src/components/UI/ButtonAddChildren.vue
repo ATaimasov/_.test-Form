@@ -13,7 +13,7 @@ import AddIcon from '@/components/icons/AddIcon.vue'
 <style lang="scss" scoped>
     .btn {
         &.btn-add {
-            @include buttonRoundFlat;
+            @include btn.buttonRoundFlat;
             align-items: center;
             display: flex;
             gap: 0.25rem; //4px;

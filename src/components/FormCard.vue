@@ -3,14 +3,14 @@
     <div class="form__container">
       <h2 class="form__title">Персональные данные</h2>
       <FormInput
-      v-model="localPerson.name"
+      v-model.trim="localPerson.name"
       :errorName="PLACEHOLDER.errors.nameError"
       :hasError="localPerson.errors.nameError"
       :placeholder="PLACEHOLDER.name"
       @validate="validateName"
       />
       <FormInput
-      v-model="localPerson.age"
+      v-model.number="localPerson.age"
       :errorName="PLACEHOLDER.errors.ageError"
       :hasError="localPerson.errors.ageError"
       :placeholder="PLACEHOLDER.age"
@@ -34,14 +34,14 @@
         class="form__children-list"
       >
         <FormInput
-        v-model="child.name"
+        v-model.trim="child.name"
         :errorName="PLACEHOLDER.errors.nameError"
         :hasError="child.errors.nameError"
         @validate="(value) => validateChildName(index, value)"
         :placeholder="PLACEHOLDER.name"
         />
         <FormInput
-        v-model="child.age"
+        v-model.number="child.age"
         :errorName="PLACEHOLDER.errors.ageError"
         :hasError="child.errors.ageError"
         @validate="(value) => validateChildAge(index, value)"
@@ -208,8 +208,8 @@ const saveInfo = () => {
   &__title {
     padding-bottom: 0.625rem;
     font-weight: 500;
-    line-height: $line-height-h3;
-    font-size: $font-size-h2;
+    line-height: v.$line-height-h3;
+    font-size: v.$font-size-h2;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -222,19 +222,19 @@ const saveInfo = () => {
   }
 
   &__title-btn {
-    @include buttonPrimaryWhite;
-    background: $color-primary-white;
+    @include btn.buttonPrimaryWhite;
+    background: v.$color-primary-white;
     padding: 0.625rem 1.25rem;
 
     &:hover:not(&--disabled) {
-      background: $color-primary-hover;
-      color: $color-primary-white;
+      background: v.$color-primary-hover;
+      color: v.$color-primary-white;
       border-color: transparent;
     }
 
     // &--disabled.btn {
-    //     background: $color-primary-disabled;
-    //     color: $color-primary-white;
+    //     background: v.$color-primary-disabled;
+    //     color: v.$color-primary-white;
     //     border-color: transparent;
     // }
     // in the test task asked to disappear  button. this is opposed UI kit (button have disabled state) 
@@ -245,6 +245,6 @@ const saveInfo = () => {
 }
 
 .btn-disabled {
-  background: $color-primary-disabled;
+  background: v.$color-primary-disabled;
 }
 </style>

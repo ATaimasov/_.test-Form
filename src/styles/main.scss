@@ -1,7 +1,6 @@
-@import './_variables';
-@import './_reset';
-@import './_mixins';
-
+@use 'base/reset' as *;
+@use '@abstracts/variables' as *;
+@use '@mixins/media-queries' as mq;
 
 // height of the template: 768px
 // weight of the template: 1366px
@@ -13,21 +12,7 @@ html {
     font-weight: 400;
     color: #000000;
 
-    @media screen and (max-width: 1100px) {
-        & {
-            font-size: 70%;
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        & {
-            font-size: 50%;
-        }
-    }
-
-
-    
-
+    @include mq.responsive-font;
 }
 
 
@@ -40,17 +25,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    @media screen and (max-width: 1100px) {
-        & {
-            grid-template-columns: repeat(1, 70%);
-        }
-    }
-
-    @media screen and (max-width: 750px) {
-        & {
-            grid-template-columns: repeat(1, 100%);
-        }
-    }
+    @include mq.responsive-body;
 
 }
 

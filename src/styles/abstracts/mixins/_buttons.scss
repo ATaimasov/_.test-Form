@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 @mixin buttonDefault {
     border: none;
     border-radius: 4px;
