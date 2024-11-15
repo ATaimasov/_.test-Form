@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue'
+import { ref } from 'vue'
 const { errorName, validateFunction, placeholder, maxLength, modelValue, hasError } = defineProps({
     modelValue: String,
     errorName: String,
@@ -67,10 +67,10 @@ const updateValue = (event) => {
       top: 25%;
       font-size: 0.813rem;
 
-      & + .form__error {
-        font-size: 0.9rem;
-        top: 50%;
-      }
+      // & + .form__error {
+      //   font-size: 0.9rem;
+      //   top: 50%;
+      // }
     }
 
     &--error {
