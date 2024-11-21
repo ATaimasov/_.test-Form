@@ -16,9 +16,11 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        api: 'modern-compiler',
         additionalData: `
           @use "@abstracts/variables" as v;
           @use "@mixins/buttons" as btn;
+          @use "@mixins/media-queries" as mq;
         `,
       },
     },

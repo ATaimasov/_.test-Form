@@ -1,19 +1,20 @@
-@mixin responsive-font {
-    @media screen and (max-width: 1100px) {
-      font-size: 70%;
-    }
-  
-    @media screen and (max-width: 750px) {
-      font-size: 50%;
+$breakpoint-tablet: 750px;
+$breakpoint-desktop: 1100px;
+
+@mixin responsive-value ($property, $min, $medium: null, $max: null) {
+
+  & {
+    #{$property}: $min;
+  }
+
+  @if $medium {
+    @media screen and (min-width: $breakpoint-tablet) {
+      #{$property}: $medium;
     }
   }
-  
-  @mixin responsive-body {
-    @media screen and (max-width: 1100px) {
-      grid-template-columns: repeat(1, 70%);
-    }
-  
-    @media screen and (max-width: 750px) {
-      grid-template-columns: repeat(1, 100%);
+  @if $max {
+    @media screen and (min-width: $breakpoint-desktop) {
+      #{$property}: $max;
     }
   }
+}

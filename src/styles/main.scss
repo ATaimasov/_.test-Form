@@ -1,18 +1,16 @@
 @use 'base/reset' as *;
 @use '@abstracts/variables' as *;
-@use '@mixins/media-queries' as mq;
 
 // height of the template: 768px
 // weight of the template: 1366px
 
 html {
-    font-size: 100%;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
     color: #000000;
 
-    @include mq.responsive-font;
+    @include mq.responsive-value(font-size, 50%, 70%, 100%);
 }
 
 
@@ -21,12 +19,10 @@ body {
     width: 100lvw;
     display: grid;
     grid-template-rows: 9.9% 80.2% 9.9%; // 76px 616px 76px
-    grid-template-columns: repeat(1, 100%);
     justify-content: center;
     align-items: center;
 
-    @include mq.responsive-body;
-
+    @include mq.responsive-value(grid-template-columns, repeat(1, 100%));
 }
 
 main {

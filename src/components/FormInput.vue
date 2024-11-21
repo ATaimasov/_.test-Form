@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const { errorName, validateFunction, placeholder, maxLength, modelValue, hasError } = defineProps({
     modelValue: String,
     errorName: String,
@@ -41,8 +41,6 @@ const updateValue = (event) => {
   emit('update:modelValue', value)
   emit('validate', value)
 }
-
-
 </script>
 
 <style lang="scss" scoped>

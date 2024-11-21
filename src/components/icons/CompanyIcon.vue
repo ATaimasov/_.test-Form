@@ -10,5 +10,8 @@
     svg {
         width: 175px;
         height: 32px;
+
+        @include mq.responsive-value(width, 122.5px, 175px);
+        @include mq.responsive-value(height, 22.4px, 32px);
     }
 </style>
