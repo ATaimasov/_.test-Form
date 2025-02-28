@@ -1,31 +1,30 @@
 <script setup>
-import TheHeader from '@/components/TheHeader.vue'
-import TheFooter from '@/components/TheFooter.vue'
-import { useRoute } from 'vue-router'
+import TheHeader from "@/components/TheHeader.vue";
+import TheFooter from "@/components/TheFooter.vue";
+import { useRoute } from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
 </script>
 
 <template>
   <div>
-    <TheHeader/>
+    <TheHeader />
     <Teleport to="#main">
-        <router-view v-slot="{ Component }">
-          <transition :name="'fade'" mode="out-in">
-            <keep-alive>
-              <component :is="Component" :key="route.path" />
-            </keep-alive>
-          </transition>
-        </router-view>
+      <router-view v-slot="{ Component }">
+        <transition :name="'fade'" mode="out-in">
+          <keep-alive>
+            <component :is="Component" :key="route.path" />
+          </keep-alive>
+        </transition>
+      </router-view>
     </Teleport>
-    <TheFooter/>
+    <TheFooter />
   </div>
 </template>
 
 <style>
-
 .fade-enter-active,
-.fade-leave-active{
+.fade-leave-active {
   transition: all 0.3s ease-out;
 }
 
@@ -33,5 +32,4 @@ const route = useRoute()
 .fade-leave-to {
   opacity: 0;
 }
-
 </style>

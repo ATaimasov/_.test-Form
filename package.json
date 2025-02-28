@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettier": "prettier --write . --ignore-path .gitignore"
   },
   "dependencies": {
     "pinia": "^2.2.6",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
+    "prettier": "3.5.2",
     "sass-embedded": "^1.80.6",
     "vite": "^5.4.10"
   }

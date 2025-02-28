@@ -1,8 +1,7 @@
 $breakpoint-tablet: 750px;
 $breakpoint-desktop: 1100px;
 
-@mixin responsive-value ($property, $min, $medium: null, $max: null) {
-
+@mixin responsive-value($property, $min, $medium: null, $max: null) {
   & {
     #{$property}: $min;
   }

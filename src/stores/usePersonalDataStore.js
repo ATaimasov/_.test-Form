@@ -1,16 +1,16 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { ref, computed } from "vue";
+import { defineStore } from "pinia";
 
-export const usePersonalDataStore = defineStore('personalData', () => {
+export const usePersonalDataStore = defineStore("personalData", () => {
   const person = ref({
-    name: '',
+    name: "",
     age: null,
     children: [],
-  })
-  
-  const savePersonalData  = (data) => {
-    person.value = { ...data }
-  }
+  });
 
-  return { person, savePersonalData  }
-})
+  const savePersonalData = (data) => {
+    person.value = { ...data };
+  };
+
+  return { person, savePersonalData };
+});
