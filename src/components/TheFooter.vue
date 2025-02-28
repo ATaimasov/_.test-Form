@@ -12,30 +12,30 @@
 
 <style lang="scss">
 .footer {
-  background: #fafafa;
-  box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
   height: 100%;
   width: 100%;
+  background: #fafafa;
+  box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
+}
 
-  &-container {
-    display: grid;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-  }
+.footer-container {
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
 
-  &__text-container {
-    margin: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.footer__text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+}
 
-  &-text {
-    font-size: 0.813rem;
-    line-height: 1rem;
-  }
+.footer-text {
+  font-size: 0.813rem;
+  line-height: 1rem;
 }
 </style>

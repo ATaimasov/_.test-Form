@@ -51,54 +51,52 @@ const updateValue = (event) => {
 </script>
 
 <style lang="scss" scoped>
-.form {
-  &__input-wrapper {
-    position: relative;
-    width: 100%;
-  }
+.form__input-wrapper {
+  position: relative;
+  width: 100%;
+}
 
-  &__input {
-    height: 3.5rem;
-    width: 100%;
-    border: 1px solid v.$color-GrayL;
-    border-radius: 4px;
-    padding-left: 0.625rem;
-    padding-top: 0.938rem;
+.form__input {
+  height: 3.5rem;
+  width: 100%;
+  padding-left: 0.625rem;
+  padding-top: 0.938rem;
+  border: 1px solid v.$color-GrayL;
+  border-radius: 4px;
 
-    &:focus + .form__placeholder,
-    &:focus-visible + .form__placeholder,
-    &:not(:placeholder-shown) + .form__placeholder {
-      top: 25%;
-      font-size: 0.813rem;
-
-      // & + .form__error {
-      //   font-size: 0.9rem;
-      //   top: 50%;
-      // }
-    }
-
-    &--error {
-      background: v.$color-error;
-    }
-  }
-
-  &__placeholder {
-    position: absolute;
-    top: 50%;
-    left: 0.625rem;
-    transform: translateY(-50%);
-    color: v.$color-GrayK;
-    transition: v.$animation-default;
-  }
-
-  &__error {
-    font-size: 0.813rem;
-    position: absolute;
+  &:focus + .form__placeholder,
+  &:focus-visible + .form__placeholder,
+  &:not(:placeholder-shown) + .form__placeholder {
     top: 25%;
-    right: 0.625rem;
-    transform: translateY(-50%);
-    color: v.$color-red;
-    transition: v.$animation-default;
+    font-size: 0.813rem;
+
+    // & + .form__error {
+    //   font-size: 0.9rem;
+    //   top: 50%;
+    // }
   }
+
+  &--error {
+    background: v.$color-error;
+  }
+}
+
+.form__placeholder {
+  position: absolute;
+  top: 50%;
+  left: 0.625rem;
+  transform: translateY(-50%);
+  color: v.$color-GrayK;
+  transition: v.$animation-default;
+}
+
+.form__error {
+  position: absolute;
+  top: 25%;
+  right: 0.625rem;
+  transform: translateY(-50%);
+  font-size: 0.813rem;
+  color: v.$color-red;
+  transition: v.$animation-default;
 }
 </style>

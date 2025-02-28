@@ -61,7 +61,6 @@
 
 <script setup>
 import { computed, reactive, ref } from "vue";
-// import { onDeactivated, onActivated } from 'vue'
 import ButtonRemove from "@/components/UI/ButtonRemove.vue";
 import ButtonSave from "@/components/UI/ButtonSave.vue";
 import ButtonAddChildren from "@/components/UI/ButtonAddChildren.vue";
@@ -188,61 +187,60 @@ const saveInfo = () => {
 
 <style lang="scss" scoped>
 .form {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 2.75rem;
   width: 70%;
   max-width: 38.5rem;
   margin-top: 1.875rem;
-  display: grid;
+}
+
+.form__container {
+  width: 100%;
+  display: flex;
   flex-direction: column;
-  gap: 2.75rem;
-  grid-template-rows: auto auto;
+  row-gap: 0.625rem;
 
-  &__container {
+  &:first-child .form__input {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.625rem;
+  }
+}
 
-    &:first-child .form__input {
-      width: 100%;
-    }
+.form__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.625rem;
+  font-size: v.$font-size-h2;
+  line-height: v.$line-height-h3;
+  font-weight: 500;
+}
+
+.form__children-list {
+  display: flex;
+  align-items: center;
+  gap: 2.92%;
+}
+
+.form__title-btn {
+  padding: 0.625rem 1.25rem;
+  background: v.$color-primary-white;
+  @include btn.buttonPrimaryWhite;
+
+  &:hover:not(&--disabled) {
+    color: v.$color-primary-white;
+    background: v.$color-primary-hover;
+    border-color: transparent;
   }
 
-  &__title {
-    padding-bottom: 0.625rem;
-    font-weight: 500;
-    line-height: v.$line-height-h3;
-    font-size: v.$font-size-h2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__children-list {
-    display: flex;
-    gap: 2.92%;
-    align-items: center;
-  }
-
-  &__title-btn {
-    @include btn.buttonPrimaryWhite;
-    background: v.$color-primary-white;
-    padding: 0.625rem 1.25rem;
-
-    &:hover:not(&--disabled) {
-      background: v.$color-primary-hover;
-      color: v.$color-primary-white;
-      border-color: transparent;
-    }
-
-    // &--disabled.btn {
-    //     background: v.$color-primary-disabled;
-    //     color: v.$color-primary-white;
-    //     border-color: transparent;
-    // }
-    // in the test task asked to disappear  button. this is opposed UI kit (button have disabled state)
-    &--disabled.btn {
-      opacity: 0;
-    }
+  // &--disabled.btn {
+  //     color: v.$color-primary-white;
+  //     background: v.$color-primary-disabled;
+  //     border-color: transparent;
+  // }
+  // in the test task asked to disappear  button. this is opposed UI kit (button have disabled state)
+  &--disabled.btn {
+    opacity: 0;
   }
 }
 

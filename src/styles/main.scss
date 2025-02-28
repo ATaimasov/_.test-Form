@@ -5,7 +5,7 @@
 // weight of the template: 1366px
 
 html {
-  font-family: "Montserrat";
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 400;
   color: #000000;
@@ -68,5 +68,4 @@ main {
 .section {
   display: flex;
   justify-content: center;
-  align-content: center;
 }

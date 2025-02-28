@@ -45,54 +45,51 @@ const { person } = storeToRefs(personalDataStore);
 
 <style lang="scss" scoped>
 .preview {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 3.75rem;
   width: 70%;
   max-width: 38.5rem;
   margin-top: 1.875rem;
-  display: grid;
+}
+
+.preview__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: v.$font-size-h2;
+  line-height: v.$line-height-h3;
+  font-weight: 500;
+}
+
+.preview-container {
+  display: flex;
   flex-direction: column;
-  gap: 3.75rem;
-  grid-template-rows: auto auto;
+  align-content: center;
+  justify-content: center;
+  row-gap: 1.25rem;
+  width: 100%;
+}
 
-  &__title {
-    font-weight: 500;
-    line-height: v.$line-height-h3;
-    font-size: v.$font-size-h2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.preview__info-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: v.$font-size-h2;
+  font-weight: 700;
+  line-height: v.$line-height-h3;
+}
 
-  &-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    row-gap: 1.25rem;
-    justify-content: center;
-    align-content: center;
-  }
+.preview__info-child-container {
+  display: flex;
+}
 
-  &__info {
-    &-text {
-      font-weight: 700;
-      line-height: v.$line-height-h3;
-      font-size: v.$font-size-h2;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    &-child-container {
-      display: flex;
-    }
-
-    &-child {
-      display: inline;
-      height: 2.75rem;
-      border: 1px solid v.$color-GrayL;
-      background: v.$color-GrayL;
-      border-radius: 4px;
-      padding: 0.625rem 1.25rem;
-    }
-  }
+.preview__info-child {
+  display: inline;
+  height: 2.75rem;
+  padding: 0.625rem 1.25rem;
+  background: v.$color-GrayL;
+  border: 1px solid v.$color-GrayL;
+  border-radius: 4px;
 }
 </style>
